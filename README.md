@@ -10,6 +10,7 @@ Quartus prime
 
 **THEORY**
 
+
 **T Flip-Flop**
 
 T flip-flop is the simplified version of JK flip-flop. It is obtained by connecting the same input ‘T’ to both inputs of JK flip-flop. It operates with only positive clock transitions or negative clock transitions. The circuit diagram of T flip-flop is shown in the following figure.
@@ -28,53 +29,53 @@ From the above characteristic table, we can directly write the next state equati
 
 **Procedure**
 
-/* write all the steps invloved */
+1.Define Module: Define a Verilog module for the T flip-flop with inputs (T, CLK) and outputs (Q, Q_bar).
 
-1.Initialize the shift register to a known state (e.g., all zeros).
+2.Declare Inputs and Outputs: Declare input and output ports for the module.
 
-2.Input a bit serially into the shift register.
+3.Implement Flip-Flop Logic: Write Verilog code to implement the T flip-flop logic based on its functional table. Use a synchronous always @(posedge CLK) block to trigger the flip-flop on the positive edge of the clock signal.
 
-3.Shift the contents of the register one position to the right (or left).
+4.Simulate Using Testbench: Write a Verilog testbench to simulate the behavior of the T flip-flop under different input conditions.
 
-4.Output the shifted bit from the last stage of the register.
+5.Apply Input Stimuli: In the testbench, apply various combinations of input stimuli (T, CLK) to cover all possible input states.
 
-5.Repeat steps 2-4 for each bit you want to input and shift.
+6.Verify Output Behavior: Verify that the output behavior of the T flip-flop matches the expected behavior defined by its functional table.
+
+7.Check for Race Conditions: Ensure that there are no race conditions or undefined states in the design by analyzing the timing and sequence of input changes.
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
-
-DEVELOPED BY: RTIHIKA N
-REGISTER NUMBER:212223230172
-
+/* Program for flipflops and verify its truth table in quartus using Verilog programming. 
 ```
-module exp11(out,clk,rstn);
-input clk,rstn;
-output reg [3:0]out;
-always @ (posedge clk)
-begin
-   if(!rstn)
-     out<=0;
-   else 
-     out <= out+1;
+Developed by: RITHIKA
+RegisterNumber:212223230172
+```
+```
+module TFLIPFLOPPOSEDGE( input clk, rst_n, input t,
+output reg q,
+output q_bar
+);
+always@(posedge clk) 
+begin 
+if(!rst_n)
+q<=0;
+else
+if(t)
+q<=~q;
+else
+q<=q;
 end
+assign q_bar = ~q;
 endmodule
 ```
 
-
 **RTL LOGIC FOR FLIPFLOPS**
+![image](https://github.com/user-attachments/assets/35acc450-2487-4863-b1b5-6513b82c141e)
 
-![image](https://github.com/Rithikachezhian/T-FLIPFLOP-POSEDGE/assets/145742406/74a83c97-5a0d-4352-abb2-4db3500a9f5c)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
 
-![image](https://github.com/Rithikachezhian/T-FLIPFLOP-POSEDGE/assets/145742406/061f758b-8fea-4596-8272-1bd9a0876ebe)
-
-**TRUTH TABLE:**
-
-![image](https://github.com/Rithikachezhian/T-FLIPFLOP-POSEDGE/assets/145742406/99a5c62f-5675-4dd4-be60-81b3e49503ba)
+![Screenshot 2025-05-13 133137](https://github.com/user-attachments/assets/c6548011-d655-4fcf-9e08-772886956ea6)
 
 **RESULTS**
-
-Thus the program executed successfully.
+Hence, T flipflop using verilog and validating their functionality using their functional tables is implemented.
